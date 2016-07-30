@@ -22,11 +22,11 @@ module.exports.loop = function () {
         console.log('Spawning new harvester: ' + newName);
     }*/
 
-    if(harvesters.length < 15 && Game.spawns[Spawn1].energy >= 250) {
+    if(harvesters.length < 8 && Game.spawns[Spawn1].energy >= 250) {
         var newName = Game.spawns[Spawn1].createCreep([WORK,MOVE,CARRY,MOVE], undefined, {role: 'harvester'});
         console.log('Spawning new harvester: ' + newName);
     }
-    if(upgraders.length < 15 && Game.spawns[Spawn1].energy >= 300) {
+    if(upgraders.length < 8 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
         console.log('Spawning new upgrader: ' + newName);
     }
