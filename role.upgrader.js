@@ -28,7 +28,7 @@ var roleUpgrader = {
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
                     if (sources.length > 0) {
-                        var seed = _.floor(_.random() * (sources.length - 1));
+                        var seed = _.floor(_.random() * (sources.length +1 - 1));
 
                         creep.memory.sourceDestination = sources[seed].id;
                         creep.moveTo(sources[seed]);

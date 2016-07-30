@@ -1,43 +1,33 @@
+var roleHarvester = require('role.harvester');
+
 var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
 
         if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.repairing = false;
+            creep.memory.building = false;
             creep.say('harvesting');
         }
-        if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.repairing = true;
-            creep.say('repairing');
+        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.building = true;
+            creep.say('building');
         }
 
-        if(creep.memory.repairing) {
-            targets = Game.find(FIND_MY_CREEPS, {
-                filter: (creep) => {
-                    return (creep.hits < creep.hitsMax);
+        if(creep.memory.building) {
+            target = Game.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+            if (target != undefined) {
+                if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
                 }
-            });
-            if (targets.length > 0) {
-                if(creep.heal(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
-                }
-            }
-            targets = Game.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.hits < structure.hitsMax);
-                }
-            });
-            if (targets.length > 0) {
-                if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
-                }
+            } else {
+                roleHarvester.run(creep);
             }
         }
         else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+            var source = creep.pos.findClosestByPath(FIND_SOURCES);
+            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(source);
             }
         }
     }
