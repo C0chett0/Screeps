@@ -15,24 +15,24 @@ var roleRepair = {
         }
 
         if (creep.memory.repairing) {
-            targets = room.find(FIND_MY_CREEPS, {
+            target = creep.pos.findClosestByPath(FIND_MY_CREEPS, {
                 filter: (creep) => {
                     return (creep.hits < creep.hitsMax);
                 }
             });
-            if (targets.length > 0) {
-                if (creep.heal(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+            if (target != undefined) {
+                if (creep.heal(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
                 }
             } else {
-                targets = room.find(FIND_STRUCTURES, {
+                target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.hits < structure.hitsMax);
                     }
                 });
-                if (targets.length > 0) {
-                    if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0]);
+                if (target != undefined) {
+                    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
                     }
                 } else {
                     roleHarvester.run(creep);
