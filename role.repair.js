@@ -23,6 +23,8 @@ var roleRepair = {
             if (target != undefined) {
                 if (creep.heal(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
+                } else {
+                    console.log(creep.name + " healing " + target.name);
                 }
             } else {
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
@@ -33,6 +35,8 @@ var roleRepair = {
                 if (target != undefined) {
                     if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
+                    } else {
+                        console.log(creep.name + " repairing " + target.name);
                     }
                 } else {
                     roleHarvester.run(creep);
