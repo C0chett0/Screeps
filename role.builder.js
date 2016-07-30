@@ -15,7 +15,7 @@ var roleBuilder = {
         }
 
         if(creep.memory.building) {
-            target = Game.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+            target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
             if (target != undefined) {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
