@@ -15,7 +15,6 @@ var roleHarvester = {
                     if (sources.length > 0) {
                         var seed = _.floor(_.random() * (sources.length - 1));
 
-                        console.log("seed : " + seed);
                         creep.memory.sourceDestination = sources[seed].id;
                         creep.moveTo(sources[seed]);
                     }
