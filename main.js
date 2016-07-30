@@ -14,11 +14,11 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     //console.log('Harvesters: ' + harvesters.length);
 
-    if(harvesters.length < 5 && Game.spawns['Spawn1'].energy > 200) {
+    if(harvesters.length < 5 && Game.spawns['Spawn1'].energy >= 300) {
         var newName = Game.spawns['Spawn1'].createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'harvester'});
         console.log('Spawning new harvester: ' + newName);
     }
-    if(upgraders.length < 20 && Game.spawns['Spawn1'].energy > 200) {
+    if(upgraders.length < 20 && Game.spawns['Spawn1'].energy >= 300) {
         var newName = Game.spawns['Spawn1'].createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
         console.log('Spawning new upgrader: ' + newName);
     }
