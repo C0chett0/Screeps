@@ -2,7 +2,6 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        console.log('toto');
 
         if (creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
@@ -19,11 +18,12 @@ var roleUpgrader = {
             }
         }
         else {
-            if (target = creep.pos.findInRange(FIND_SOURCES, 1)) {
-                creep.harvest(target);
+            targets = creep.pos.findInRange(FIND_SOURCES, 1)
+            if (targets.length > 0) {
+                creep.harvest(targets[0]);
                 creep.memory.sourceDestination = undefined;
             } else {
-                if (creep.memory.sourceDestination) {
+                if (creep.memory.sourceDestination != undefined) {
                     creep.moveTo(creep.memory.sourceDestination);
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
