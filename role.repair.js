@@ -15,7 +15,7 @@ var roleRepair = {
         }
 
         if (creep.memory.repairing) {
-            targets = Game.find(FIND_MY_CREEPS, {
+            targets = room.find(FIND_MY_CREEPS, {
                 filter: (creep) => {
                     return (creep.hits < creep.hitsMax);
                 }
@@ -25,7 +25,7 @@ var roleRepair = {
                     creep.moveTo(targets[0]);
                 }
             } else {
-                targets = Game.find(FIND_STRUCTURES, {
+                targets = room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.hits < structure.hitsMax);
                     }
