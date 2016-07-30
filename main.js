@@ -2,7 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 
 module.exports.loop = function () {
-    var Spawn1 = 'Mézon';
+    var Spawn1 = 'Maizon';
 
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
