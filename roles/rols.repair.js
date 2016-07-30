@@ -9,7 +9,7 @@ var roleRepair = {
         }
         if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
             creep.memory.repairing = true;
-            creep.say('upgrading');
+            creep.say('repairing');
         }
 
         if(creep.memory.repairing) {
