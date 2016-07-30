@@ -24,15 +24,15 @@ var roleUpgrader = {
                 creep.memory.sourceDestination = undefined;
             } else {
                 if (creep.memory.sourceDestination != undefined) {
-                    creep.moveTo(creep.memory.sourceDestination);
+                    creep.moveTo(Game.getObjectById(creep.memory.sourceDestination));
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
                     if (sources.length > 0) {
                         var seed = _.floor(_.random() * (sources.length - 1));
 
                         console.log("seed : " + seed);
-                        creep.memory.sourceDestination = sources[seed];
-                        creep.moveTo(creep.memory.sourceDestination);
+                        creep.memory.sourceDestination = sources[seed].id;
+                        creep.moveTo(sources[seed]);
                     }
                 }
             }
