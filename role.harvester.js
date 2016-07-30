@@ -3,20 +3,21 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
         if(creep.carry.energy < creep.carryCapacity) {
-            if (target = creep.pos.findInRange(FIND_SOURCES,1)) {
-                creep.harvest(target);
+            targets = creep.pos.findInRange(FIND_SOURCES, 1)
+            if (targets.length > 0) {
+                creep.harvest(targets[0]);
                 creep.memory.sourceDestination = undefined;
             } else {
-                if(creep.memory.sourceDestination) {
-                    creep.moveTo(creep.memory.sourceDestination);
+                if (creep.memory.sourceDestination != undefined) {
+                    creep.moveTo(Game.getObjectById(creep.memory.sourceDestination));
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
                     if (sources.length > 0) {
                         var seed = _.floor(_.random() * (sources.length - 1));
 
                         console.log("seed : " + seed);
-                        creep.memory.sourceDestination = sources[seed];
-                        creep.moveTo(creep.memory.sourceDestination);
+                        creep.memory.sourceDestination = sources[seed].id;
+                        creep.moveTo(sources[seed]);
                     }
                 }
             }
