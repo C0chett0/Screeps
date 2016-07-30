@@ -13,10 +13,14 @@ var roleHarvester = {
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
                     if (sources.length > 0) {
-                        var seed = _.floor(_.random() * (sources.length - 1));
+                        var seed = _.floor(_.random() * (3)) + min;
+                        if (seed > 1) {
+                            idTab = 0
+                        } else {
+                            idTab = 1
+                        }
 
-                        console.log("seed : " + seed);
-                        creep.memory.sourceDestination = sources[seed].id;
+                        creep.memory.sourceDestination = sources[idTab].id;
                         creep.moveTo(sources[seed]);
                     }
                 }
