@@ -1,4 +1,4 @@
-var map = {
+var mapUitls = {
     sources: [],
     miningSpots: [],
 
@@ -24,4 +24,4 @@ var map = {
     }
 };
 
-module.exports = map;
+module.exports = mapUitls;

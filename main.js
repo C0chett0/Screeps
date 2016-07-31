@@ -10,7 +10,7 @@ var Spawn1 = 'Maizon';
 module.exports.loop = function () {
     console.log(typeof Game.rooms['W47S28']);
 
-    var map = utilMaps.init(Game.rooms['W47S28']);
+    var mapUitls = utilMaps.init(Game.rooms['W47S28']);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -63,7 +63,7 @@ module.exports.loop = function () {
             roleRepair.run(creep);
         }
         if (creep.memory.role == 'miner') {
-            roleMiner.run(creep, map);
+            roleMiner.run(creep, mapUitls);
         }
     }
 }
