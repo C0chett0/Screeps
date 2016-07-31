@@ -10,6 +10,7 @@ var roleRepair = {
             creep.say('harvesting');
         }
         if (!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.destination = undefined;
             creep.memory.repairing = true;
             creep.say('repairing');
         }
