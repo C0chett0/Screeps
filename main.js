@@ -26,7 +26,7 @@ module.exports.loop = function () {
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     //console.log('Harvesters: ' + harvesters.length);
 
-    if (miners.length < map.miningSpots && Game.spawns[Spawn1].energy >= 250) {
+    if (miners.length < mapUitls.miningSpots && Game.spawns[Spawn1].energy >= 250) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, MOVE], undefined, {role: 'miner'});
         console.log('Spawning new miner: ' + newName);
     }
