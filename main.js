@@ -10,7 +10,7 @@ var Spawn1 = 'Maizon';
 module.exports.loop = function () {
     console.log(Game.rooms);
 
-    var map = utilMaps.init(Game.rooms[0]);
+    var map = utilMaps.init(Game.rooms);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
