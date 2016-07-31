@@ -13,7 +13,7 @@ module.exports.loop = function () {
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
-            console.log('Clearing non-existing creep memory: ', name, ' (', Memory.creeps[name].role.trim(),')');
+            console.log('Clearing non-existing creep memory:', name, '(' + Memory.creeps[name].role.trim() +')');
             delete Memory.creeps[name];
         }
     }
