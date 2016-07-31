@@ -34,12 +34,12 @@ var roleBuilder = {
                 var closestContainer = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_CONTAINER && i.store[RESOURCE_ENERGY] > 0});
                 if (closestContainer != undefined) {
                     target = closestContainer;
-                    creep.memory.destination = target.id;
+                    creep.memory.destination = closestContainer.id;
                 } else {
                     var closestDropped = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
                     if (closestDropped != undefined) {
-                        target = closestContainer;
-                        creep.memory.destination = target.id;
+                        target = closestDropped;
+                        creep.memory.destination = closestDropped.id;
                     } else {
                         var targets = creep.room.find(FIND_DROPPED_ENERGY);
                         var opti = {'id': undefined, 'qty': undefined};
