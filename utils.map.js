@@ -4,7 +4,6 @@ var mapUitls = {
 
     init: function (room) {
         var sources = room.find(FIND_SOURCES);
-        console.log(sources.length);
         sources.forEach((source) => {
             this.sources.push({
                 id: source.id,

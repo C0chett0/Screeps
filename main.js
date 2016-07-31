@@ -8,7 +8,6 @@ var utilMaps = require('utils.map');
 var Spawn1 = 'Maizon';
 
 module.exports.loop = function () {
-    console.log(typeof Game.rooms['W47S28']);
 
     utilMaps.init(Game.rooms['W47S28']);
 
