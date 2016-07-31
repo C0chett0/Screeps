@@ -27,9 +27,9 @@ var roleBuilder = {
             }
         }
         else {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES);
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
+            var target = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
+            if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
         }
     }
