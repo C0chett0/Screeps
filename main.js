@@ -34,12 +34,12 @@ module.exports.loop = function () {
         console.log('Spawning new miner: ' + newName);
     }
 
-    else if (upgraders.length < 7 && Game.spawns[Spawn1].energy >= 300) {
+    else if (upgraders.length < 10 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, CARRY, MOVE], undefined, {role: 'upgrader'});
         console.log('Spawning new upgrader: ' + newName);
     }
 
-    else if (builders.length < 5 && Game.spawns[Spawn1].energy >= 300) {
+    else if (builders.length < 8 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'builder'});
         console.log('Spawning new builder: ' + newName);
     }
