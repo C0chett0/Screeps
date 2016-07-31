@@ -8,9 +8,9 @@ var utilMaps = require('utils.map');
 var Spawn1 = 'Maizon';
 
 module.exports.loop = function () {
-    console.log(typeof Game.rooms);
+    console.log(typeof Game.rooms['W47S28']);
 
-    var map = utilMaps.init(Game.rooms);
+    var map = utilMaps.init(Game.rooms['W47S28']);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
