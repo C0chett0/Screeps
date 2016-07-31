@@ -9,16 +9,17 @@ var roleMiner = {
                 var spot = map.miningSpots[i];
                 if (!spot.reserved)
                 {
-                    creep.memory.mySpot = [spot.x, spot.y];
                     spot.reserved = true;
                     flag = true;
                 }
                 i++;
             }
         }
-        if (creep.pos.x != creep.memory.mySpot[0] || creep.pos.y != creep.memory.mySpot[1]) {
-            creep.moveTo(creep.memory.mySpot[0], creep.memory.mySpot[1]);
+        if (creep.pos.x != spot.x || creep.pos.y != spot.y) {
+            creep.memory.mySpot = [spot.x, spot.y] = undefined;
+            creep.moveTo(spot.x, spot.y);
         } else {
+            creep.memory.mySpot = [spot.x, spot.y]
             creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES));
         }
     }
