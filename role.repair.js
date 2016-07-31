@@ -45,7 +45,8 @@ var roleRepair = {
             var target;
             if (creep.memory.destination != undefined) {
                 target = Game.getObjectById(creep.memory.destination);
-            } else {
+            }
+            if (target == undefined) {
                 var targets = creep.room.find(FIND_DROPPED_ENERGY);
                 var opti = {'id': undefined, 'qty': undefined};
                 for(var i = targets.length - 1; i>=0; i--) {
