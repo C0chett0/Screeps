@@ -5,6 +5,7 @@ var mapUitls = {
     init: function (room) {
         var sources = room.find(FIND_SOURCES);
         for (let source in sources) {
+            console.log(source);
             this.sources.push({
                 id: source.id,
                 dist: room.findPath(source.pos, room.storage).length
