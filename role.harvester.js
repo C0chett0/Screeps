@@ -13,7 +13,7 @@ var roleHarvester = {
                 } else {
                     var sources = creep.room.find(FIND_SOURCES);
                     if (sources.length > 0) {
-                        var seed = _.floor(_.random() * (3)) + min;
+                        var seed = _.floor(_.random() * (3)) + 1;
                         if (seed > 1) {
                             idTab = 0
                         } else {
