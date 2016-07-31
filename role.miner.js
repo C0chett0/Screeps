@@ -16,6 +16,7 @@ var roleMiner = {
             }
         } else {
             spot = {x: creep.memory.mySpot[0], y: creep.memory.mySpot[1]};
+            console.log ("Creep "+creep.name + " goes to :"+spot.x+","+spot.y);
         }
         if (creep.pos.x != spot.x || creep.pos.y != spot.y) {
             creep.memory.mySpot = undefined;
