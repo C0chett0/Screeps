@@ -26,10 +26,10 @@ module.exports.loop = function () {
     //console.log('Harvesters: ' + harvesters.length);
 
     if (harvesters.length < 5 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, CARRY, MOVE], undefined, {role: 'harvester'});
+        var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'harvester'});
         console.log('Spawning new harvester: ' + newName);
     }
-    if (miners.length < 3 && Game.spawns[Spawn1].energy >= 250) {
+    if (miners.length < 3 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, MOVE], undefined, {role: 'miner'});
         console.log('Spawning new miner: ' + newName);
     }
