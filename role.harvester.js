@@ -21,7 +21,9 @@ var roleHarvester = {
                     creep.memory.destination = opti.id;
                 } else {
                     target = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
-                    creep.memory.destination = target.id;
+                    if (target != undefined) {
+                        creep.memory.destination = target.id;
+                    }
                 }
             }
             if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.harvest(target) == ERR_NOT_IN_RANGE) {
