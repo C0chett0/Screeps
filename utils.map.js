@@ -8,7 +8,6 @@ var mapUitls = {
         sources.forEach((source) => {
             this.sources.push({
                 id: source.id,
-                dist: room.findPath(source.pos, room.storage).length
             });
             var tiles = room.lookForAtArea(LOOK_TERRAIN, source.pos.y-1, source.pos.x-1,source.pos.y+1, source.pos.x+1, true);
             tiles.forEach((tile) => {
