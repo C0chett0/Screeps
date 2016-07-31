@@ -3,7 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repair');
 var roleMiner = require('role.miner');
-var utilMaps = require(utils.map);
+var utilMaps = require('utils.map');
 
 var Spawn1 = 'Maizon';
 
