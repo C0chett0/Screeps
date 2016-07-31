@@ -39,7 +39,7 @@ var roleBuilder = {
                     var closestDropped = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
                     if (closestDropped != undefined) {
                         target = closestDropped;
-                        creep.memory.destination = closestDropped.id;
+                        //creep.memory.destination = closestDropped.id;
                     } else {
                         var targets = creep.room.find(FIND_DROPPED_ENERGY);
                         var opti = {'id': undefined, 'qty': undefined};
