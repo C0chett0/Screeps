@@ -25,7 +25,7 @@ var roleMiner = {
                 creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES));
             }
         } else {
-            creep.memory.mySpot = [spot.x, spot.y];
+            creep.memory.mySpot = [creep.pos.x, creep.pos.y];
         }
     }
 };
