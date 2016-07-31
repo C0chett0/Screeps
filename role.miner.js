@@ -18,7 +18,7 @@ var roleMiner = {
             spot = {x: creep.memory.mySpot[0], y: creep.memory.mySpot[1]};
         }
         if (creep.pos.x != spot.x || creep.pos.y != spot.y) {
-            creep.memory.mySpot = [spot.x, spot.y];
+            creep.memory.mySpot = undefined;
             creep.moveTo(spot.x, spot.y);
         } else {
             creep.memory.mySpot = [spot.x, spot.y]
