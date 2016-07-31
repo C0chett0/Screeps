@@ -27,9 +27,27 @@ var roleBuilder = {
             }
         }
         else {
-            var target = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
-            if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
+            targets = creep.pos.findInRange(FIND_SOURCES, 1)
+            if (targets.length > 0) {
+                creep.harvest(targets[0]);
+                creep.memory.sourceDestination = undefined;
+            } else {
+                if (creep.memory.sourceDestination != undefined) {
+                    creep.moveTo(Game.getObjectById(creep.memory.sourceDestination));
+                } else {
+                    var sources = creep.room.find(FIND_SOURCES);
+                    if (sources.length > 0) {
+                        var seed = _.floor(_.random() * (3)) + 1;
+                        if (seed > 1) {
+                            idTab = 0
+                        } else {
+                            idTab = 1
+                        }
+
+                        creep.memory.sourceDestination = sources[idTab].id;
+                        creep.moveTo(sources[seed]);
+                    }
+                }
             }
         }
     }
