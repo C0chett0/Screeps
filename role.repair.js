@@ -35,8 +35,6 @@ var roleRepair = {
                 if (target != undefined) {
                     if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
-                    } else {
-                        console.log(creep.name + " repairing " + target.name);
                     }
                 } else {
                     roleHarvester.run(creep);

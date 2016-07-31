@@ -19,8 +19,6 @@ var roleBuilder = {
             if (target != undefined) {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
-                } else {
-                    console.log(creep.name + " building " + target.structureType);
                 }
             } else {
                 roleHarvester.run(creep);
