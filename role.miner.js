@@ -2,28 +2,30 @@ var roleMiner = {
 
     /** @param {Creep} creep **/
     run: function(creep, map) {
-        if(creep.memory.mySpot == undefined) {
-            var flag = false;
-            var i = 0;
-            while(!flag && i < map.miningSpots.length) {
-                var spot = map.miningSpots[i];
-                if (!spot.reserved)
-                {
-                    spot.reserved = true;
-                    flag = true;
+        if(creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES)) < 0) {
+            if (creep.memory.mySpot == undefined) {
+                var flag = false;
+                var i = 0;
+                while (!flag && i < map.miningSpots.length) {
+                    var spot = map.miningSpots[i];
+                    if (!spot.reserved) {
+                        spot.reserved = true;
+                        flag = true;
+                    }
+                    i++;
                 }
-                i++;
+            } else {
+                spot = {x: creep.memory.mySpot[0], y: creep.memory.mySpot[1]};
+            }
+            if (creep.pos.x != spot.x || creep.pos.y != spot.y) {
+                creep.memory.mySpot = undefined;
+                creep.moveTo(spot.x, spot.y);
+            } else {
+                creep.memory.mySpot = [spot.x, spot.y];
+                creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES));
             }
         } else {
-            spot = {x: creep.memory.mySpot[0], y: creep.memory.mySpot[1]};
-        }
-        if (creep.pos.x != spot.x || creep.pos.y != spot.y) {
-            console.log ("Creep "+creep.name + " goes to :"+spot.x+","+spot.y);
-            creep.memory.mySpot = undefined;
-            creep.moveTo(spot.x, spot.y);
-        } else {
-            creep.memory.mySpot = [spot.x, spot.y]
-            creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES));
+            creep.memory.mySpot = [spot.x, spot.y];
         }
     }
 };
