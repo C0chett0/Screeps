@@ -10,7 +10,6 @@ var Spawn1 = 'Maizon';
 module.exports.loop = function () {
 
     utilMaps.init(Game.rooms['W47S28']);
-    console.log(utilMaps.miningSpots);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
