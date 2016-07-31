@@ -10,12 +10,12 @@ var roleBuilder = {
             creep.say('harvesting');
         }
         if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.destination = undefined;
             creep.memory.building = true;
             creep.say('building');
         }
 
         if(creep.memory.building) {
+            creep.memory.destination = undefined;
             target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES, {filter: (c) => c.structureType == STRUCTURE_ROAD});
             if (target != undefined) {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
