@@ -7,10 +7,10 @@ var roleMiner = {
             var i = 0;
             while(!flag && i < map.miningSpots.length) {
                 var spot = map.miningSpots[i];
-                if (!spot.reserved || Game.creeps[spot.reserved] == undefined)
+                if (!spot.reserved)
                 {
                     creep.memory.mySpot = [spot.x, spot.y];
-                    spot.reserved = creep.name;
+                    spot.reserved = true;
                     flag = true;
                 }
                 i++;
