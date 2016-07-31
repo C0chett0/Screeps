@@ -24,28 +24,30 @@ module.exports.loop = function () {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     //console.log('Harvesters: ' + harvesters.length);
+    if (Game.spawns[Spawn1].energy >= 300) {
 
-    if (harvesters.length < 2 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK], undefined, {role: 'harvester'});
-        console.log('Spawning new harvester: ' + newName);
-    }
-    else if (miners.length < 1 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, MOVE], undefined, {role: 'miner'});
-        console.log('Spawning new miner: ' + newName);
-    }
+        if (harvesters.length < 6) {
+            var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK], undefined, {role: 'harvester'});
+            console.log('Spawning new harvester: ' + newName);
+        }
+        else if (miners.length < 4) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, MOVE], undefined, {role: 'miner'});
+            console.log('Spawning new miner: ' + newName);
+        }
 
-    else if (upgraders.length < 2 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE], undefined, {role: 'upgrader'});
-        console.log('Spawning new upgrader: ' + newName);
-    }
+        else if (upgraders.length < 5) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE], undefined, {role: 'upgrader'});
+            console.log('Spawning new upgrader: ' + newName);
+        }
 
-    else if (builders.length < 1 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'builder'});
-        console.log('Spawning new builder: ' + newName);
-    }
-    else if (repairers.length < 1 && Game.spawns[Spawn1].energy >= 300) {
-        var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'repair'});
-        console.log('Spawning new repair: ' + newName);
+        else if (builders.length < 5) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'builder'});
+            console.log('Spawning new builder: ' + newName);
+        }
+        else if (repairers.length < 2) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'repair'});
+            console.log('Spawning new repair: ' + newName);
+        }
     }
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
