@@ -12,7 +12,7 @@ var mapUitls = {
             tiles.forEach((tile) => {
                 if (tile.terrain != 'wall') {
                     var creep = room.lookForAt(LOOK_CREEPS,tile.x,tile.y);
-                    var reserved = (creep != undefined && creep.memory.role == 'miner');
+                    var reserved = (creep != undefined && creep.memory != undefined && creep.memory.role == 'miner');
                     this.miningSpots.push({
                         x: tile.x,
                         y: tile.y,
