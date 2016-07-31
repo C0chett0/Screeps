@@ -22,6 +22,8 @@ var roleHarvester = {
             }
             if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
+            } else {
+                creep.memory.destination = undefined;
             }
         }
         else {
