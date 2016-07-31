@@ -13,8 +13,6 @@ var mapUitls = {
                 if (tile.terrain != 'wall') {
                     var creep = room.lookForAt(LOOK_CREEPS,tile.x,tile.y);
                     var reserved = (creep.length > 0 && creep[0].memory.role == 'miner');
-                    if(creep.length > 0)
-                    console.log("x: " +tile.x+", y: "+tile.y+", creepLength: "+creep.length+", role: "+creep[0].memory.role+", reserved: " + reserved);
                     this.miningSpots.push({
                         x: tile.x,
                         y: tile.y,

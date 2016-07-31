@@ -10,6 +10,7 @@ var Spawn1 = 'Maizon';
 module.exports.loop = function () {
 
     utilMaps.init(Game.rooms['W47S28']);
+    console.log(utilMaps.miningSpots);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -25,7 +26,7 @@ module.exports.loop = function () {
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     //console.log('Harvesters: ' + harvesters.length);
 
-    if (harvesters.length < 9 && Game.spawns[Spawn1].energy >= 300) {
+    if (harvesters.length < 7 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'harvester'});
         console.log('Spawning new harvester: ' + newName);
     }
@@ -34,7 +35,7 @@ module.exports.loop = function () {
         console.log('Spawning new miner: ' + newName);
     }
 
-    else if (upgraders.length < 8 && Game.spawns[Spawn1].energy >= 300) {
+    else if (upgraders.length < 7 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, CARRY, MOVE], undefined, {role: 'upgrader'});
         console.log('Spawning new upgrader: ' + newName);
     }
@@ -43,7 +44,7 @@ module.exports.loop = function () {
         var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'builder'});
         console.log('Spawning new builder: ' + newName);
     }
-    else if (repairers.length < 3 && Game.spawns[Spawn1].energy >= 300) {
+    else if (repairers.length < 2 && Game.spawns[Spawn1].energy >= 300) {
         var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE], undefined, {role: 'repair'});
         console.log('Spawning new repair: ' + newName);
     }
