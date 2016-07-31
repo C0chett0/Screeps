@@ -4,14 +4,13 @@ var mapUitls = {
 
     init: function (room) {
         var sources = room.find(FIND_SOURCES);
-        for (let source in sources) {
-            console.log(source);
+        sources.forEach((source) => {
             this.sources.push({
                 id: source.id,
                 dist: room.findPath(source.pos, room.storage).length
             });
             var tiles = room.lookForAtArea(LOOK_TERRAIN, source.pos.y-1, source.pos.x-1,source.pos.y+1, source.pos.x+1, true);
-            for (let tile in tiles) {
+            tiles.forEach((tile) => {
                 if (tile.terrain != 'wall') {
                     this.miningSpots.push({
                         x: tile.x,
@@ -19,8 +18,9 @@ var mapUitls = {
                         reserved: false
                     });
                 }
-            }
-        }
+            });
+
+        });
 
     }
 };
