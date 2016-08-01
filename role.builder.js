@@ -23,12 +23,13 @@ var roleBuilder = {
                 }
             } else {
                 var tower = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < s.energyCapacity});
-                if(tower != undefined) {
+                if (tower != undefined) {
                     if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(tower);
                     }
+                } else {
+                    roleHarvester.run(creep);
                 }
-                roleHarvester.run(creep);
             }
         }
         else {
