@@ -1,6 +1,7 @@
 var mapUitls = {
     sources: [],
     miningSpots: [],
+    initialized: false,
 
     init: function (room) {
         var sources = room.find(FIND_SOURCES);
@@ -22,7 +23,7 @@ var mapUitls = {
             });
 
         });
-
+        this.initialized = true;
     }
 };
 
