@@ -55,11 +55,9 @@ module.exports.loop = function () {
     var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
     var availableEnergy = Game.spawns[Spawn1].energy;
     for (var i = extensions.length - 1; i >= 0; i--) {
-        //console.log("Extension a " + extensions[i].energy);
         availableEnergy += extensions[i].energy;
     }
 
-//console.log('availableEnergy: ' + availableEnergy);
     if (availableEnergy >= 350) {
 
         if (harvesters.length < maxCreeps.harvesters) {
