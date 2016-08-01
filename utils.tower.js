@@ -1,6 +1,6 @@
 var towerUitls = {
-    run: function (tower) {
-        var closestBadGuy = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+    run: function (tower, room) {
+        var closestBadGuy = room.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (closestBadGuy != undefined) {
             tower.attack(closestBadGuy);
         } else {
