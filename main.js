@@ -23,10 +23,17 @@ module.exports.loop = function () {
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
-    //console.log('Harvesters: ' + harvesters.length);
-    if (Game.spawns[Spawn1].energy >= 350) {
+    var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
+    var availableEnergy = Game.spawns[Spawn1].energy;
+    for (var i = extensions.length - 1; i >= 0 ; i--) {
+        console.log("Extension a " + extensions[i].energy);
+        availableEnergy += extensions[i].energy;
+    }
 
-        if (harvesters.length < 8) {
+    console.log('availableEnergy: ' + availableEnergy);
+    if (availableEnergy >= 350) {
+
+        if (harvesters.length < 6) {
             var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK, MOVE, CARRY, MOVE], undefined, {role: 'harvester'});
             console.log('Spawning new harvester: ' + newName);
         }
@@ -40,7 +47,7 @@ module.exports.loop = function () {
             console.log('Spawning new upgrader: ' + newName);
         }
 
-        else if (builders.length < 10) {
+        else if (builders.length < 5) {
             var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE, MOVE, MOVE], undefined, {role: 'builder'});
             console.log('Spawning new builder: ' + newName);
         }
