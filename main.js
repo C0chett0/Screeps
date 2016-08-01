@@ -36,12 +36,12 @@ module.exports.loop = function () {
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
     console.log(
-        'harvesters :',harvesters+'/'+maxCreeps.harvesters,
-        'upgraders :',upgraders+'/'+maxCreeps.upgraders,
-        'miners :',miners+'/'+maxCreeps.miners,
-        'repairers :',repairers+'/'+maxCreeps.repairers,
-        'builders :',builders+'/'+maxCreeps.builders,
-        'defenders :',defenders+'/'+maxCreeps.defenders
+        'harvesters :',harvesters.length+'/'+maxCreeps.harvesters,
+        'upgraders :',upgraders.length+'/'+maxCreeps.upgraders,
+        'miners :',miners.length+'/'+maxCreeps.miners,
+        'repairers :',repairers.length+'/'+maxCreeps.repairers,
+        'builders :',builders.length+'/'+maxCreeps.builders,
+        'defenders :',defenders.length+'/'+maxCreeps.defenders
     )
 
     var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
