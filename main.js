@@ -26,7 +26,7 @@ module.exports.loop = function () {
 
     var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy > 10});
     for(var tower in towers) {
-        towerUtils.run(tower);
+        towerUtils.run(tower, room);
     }
 
     for (var name in Memory.creeps) {
