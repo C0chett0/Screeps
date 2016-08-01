@@ -11,8 +11,9 @@ var Spawn1 = 'Maizon';
 module.exports.loop = function () {
 
     var room = Game.rooms['W48S4'];
-    utilMaps.init(room);
-
+    if(utilMaps.initialized != true) {
+        utilMaps.init(room);
+    }
     var maxCreeps = {
         harvesters: 7,
         miners: utilMaps.miningSpots.length,
