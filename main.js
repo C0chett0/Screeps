@@ -19,9 +19,9 @@ module.exports.loop = function () {
         harvesters: 7,
         miners: utilMaps.miningSpots.length,
         upgraders: 5,
-        builders: 5,
+        builders: 7,
         repairers: 2,
-        defenders: 10
+        defenders: 15
     };
 
     var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy > 10});
@@ -43,6 +43,7 @@ module.exports.loop = function () {
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
     console.log(
+        'energy :', room.energyAvailable+'/'+room.energyCapacityAvailable,
         'harvesters :',harvesters.length+'/'+maxCreeps.harvesters,
         'upgraders :',upgraders.length+'/'+maxCreeps.upgraders,
         'miners :',miners.length+'/'+maxCreeps.miners,
