@@ -4,6 +4,9 @@ var mapUitls = {
     initialized: false,
 
     init: function (room) {
+        this.miningSpots = [];
+        this.sources = [];
+        this.initialized = false;
         var sources = room.find(FIND_SOURCES);
         sources.forEach((source) => {
             this.sources.push({
