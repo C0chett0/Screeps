@@ -21,7 +21,6 @@ module.exports.loop = function () {
         repairers: 2,
         defenders: 10
     };
-    console.log('max miners:', maxCreeps.miners);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -36,6 +35,14 @@ module.exports.loop = function () {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+    console.log(
+        'harvesters :',harvesters+'/'+maxCreeps.harvesters,
+        'upgraders :',upgraders+'/'+maxCreeps.upgraders,
+        'miners :',miners+'/'+maxCreeps.miners,
+        'repairers :',repairers+'/'+maxCreeps.repairers,
+        'builders :',builders+'/'+maxCreeps.builders,
+        'defenders :',defenders+'/'+maxCreeps.defenders
+    )
 
     var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
     var availableEnergy = Game.spawns[Spawn1].energy;
