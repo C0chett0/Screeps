@@ -16,7 +16,7 @@ var towerUitls = {
             if (closestGoodGuy != undefined) {
                 tower.heal(closestGoodGuy);
             } else {
-                var damagedStructures = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.hits < s.hitsMax});
+                var damagedStructures = room.find(FIND_STRUCTURES, {filter: (s) => s.hits < s.hitsMax});
                 var closestDamagedStructure;
                 if(damagedStructures.length > 0) {
                     closestDamagedStructure = damagedStructures[0];

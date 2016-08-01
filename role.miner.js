@@ -10,7 +10,6 @@ var roleMiner = {
                 while (!flag && i < map.miningSpots.length) {
                     spot = map.miningSpots[i];
                     var creepBlocking = creep.room.lookForAt(LOOK_CREEPS,spot.x,spot.y);
-                    console.log("x:",spot.x,"y:",spot.y,"blocking:",creepBlocking,"reserved:",spot.reserved);
                     if (!(creepBlocking.length > 0 && creepBlocking[0].memory.role == 'miner')) {
                         flag = true;
                     }
