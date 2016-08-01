@@ -3,14 +3,15 @@ var roleMiner = {
     /** @param {Creep} creep **/
     run: function(creep, map) {
         if(creep.harvest(creep.pos.findClosestByPath(FIND_SOURCES)) < 0) {
+            var spot;
             if (creep.memory.mySpot == undefined) {
                 var flag = false;
                 var i = 0;
                 while (!flag && i < map.miningSpots.length) {
-                    var spot = map.miningSpots[i];
+                    spot = map.miningSpots[i];
                     var creepBlocking = creep.room.lookForAt(LOOK_CREEPS,spot.x,spot.y);
-                    if (!spot.reserved && !((creepBlocking.length > 0 && creepBlocking[0].memory.role == 'miner'))) {
-                        spot.reserved = true;
+                    console.log("x:",spot.x,"y:",spot.y,"blocking:",creepBlocking,"reserved:",spot.reserved);
+                    if (!(creepBlocking.length > 0 && creepBlocking[0].memory.role == 'miner')) {
                         flag = true;
                     }
                     i++;
