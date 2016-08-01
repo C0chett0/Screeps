@@ -9,7 +9,8 @@ var Spawn1 = 'Maizon';
 
 module.exports.loop = function () {
 
-    utilMaps.init(Game.rooms['W48S4']);
+    var room = Game.rooms['W48S4'];
+    utilMaps.init(room);
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -33,7 +34,7 @@ module.exports.loop = function () {
     console.log('availableEnergy: ' + availableEnergy);
     if (availableEnergy >= 350) {
 
-        if (harvesters.length < 6) {
+        if (harvesters.length < 7) {
             var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK, MOVE, CARRY, MOVE], undefined, {role: 'harvester'});
             console.log('Spawning new harvester: ' + newName);
         }
