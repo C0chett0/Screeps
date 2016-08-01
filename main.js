@@ -5,6 +5,7 @@ var roleRepair = require('role.repair');
 var roleMiner = require('role.miner');
 var roleDefender = require('role.defender');
 var utilMaps = require('utils.map');
+var towerUtils = require('utils.tower');
 
 var Spawn1 = 'Maizon';
 
@@ -22,6 +23,11 @@ module.exports.loop = function () {
         repairers: 2,
         defenders: 10
     };
+
+    var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy > 10});
+    for(var tower in towers) {
+        towerUtils.run(tower);
+    }
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
