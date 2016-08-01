@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repair');
 var roleMiner = require('role.miner');
+var roleDefender = require('role.defender');
 var utilMaps = require('utils.map');
 
 var Spawn1 = 'Maizon';
@@ -24,6 +25,8 @@ module.exports.loop = function () {
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
     var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
+    var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+
     var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
     var availableEnergy = Game.spawns[Spawn1].energy;
     for (var i = extensions.length - 1; i >= 0 ; i--) {
@@ -56,6 +59,10 @@ module.exports.loop = function () {
             var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE, MOVE, MOVE], undefined, {role: 'repair'});
             console.log('Spawning new repair: ' + newName);
         }
+        else if (defenders.length < 10) {
+            var newName = Game.spawns[Spawn1].createCreep([MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK], undefined, {role: 'defender'});
+            console.log('Spawning new defender: ' + newName);
+        }
     }
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -73,6 +80,9 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'miner') {
             roleMiner.run(creep, utilMaps);
+        }
+        if (creep.memory.role == 'defender') {
+            roleDefender.run(creep);
         }
     }
 }
