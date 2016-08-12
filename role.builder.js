@@ -16,21 +16,38 @@ var roleBuilder = {
 
         if (creep.memory.building) {
             creep.memory.destination = undefined;
-            target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-            if (target != undefined) {
-                if (creep.build(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+            var tower = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < s.energyCapacity/2});
+            if (tower != undefined) {
+                if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(tower);
                 }
             } else {
-                var tower = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < s.energyCapacity});
-                if (tower != undefined) {
-                    if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(tower);
+                target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+                if (target != undefined) {
+                    if (creep.build(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
                     }
                 } else {
                     roleHarvester.run(creep);
                 }
             }
+
+            /*
+             target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+             if (target != undefined) {
+             if (creep.build(target) == ERR_NOT_IN_RANGE) {
+             creep.moveTo(target);
+             }
+             } else {
+             var tower = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < s.energyCapacity});
+             if (tower != undefined) {
+             if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+             creep.moveTo(tower);
+             }
+             } else {
+             roleHarvester.run(creep);
+             }
+             }*/
         }
         else {
             var target;
@@ -38,7 +55,7 @@ var roleBuilder = {
                 target = Game.getObjectById(creep.memory.destination);
             }
             if (target == undefined) {
-                var closestContainer = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_CONTAINER && i.store[RESOURCE_ENERGY] > 0});
+                var closestContainer = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_STORAGE && i.store[RESOURCE_ENERGY] > 0});
                 if (closestContainer != undefined) {
                     target = closestContainer;
                     creep.memory.destination = closestContainer.id;
@@ -59,13 +76,25 @@ var roleBuilder = {
                         if (opti.id != undefined) {
                             target = Game.getObjectById(opti.id);
                             creep.memory.destination = opti.id;
+                        } else {
+                            target = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+                            if (target != undefined) {
+                                creep.memory.destination = target.id;
+                            }
                         }
                     }
                 }
 
             }
-            if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.withdraw(target) == ERR_NOT_IN_RANGE) {
+            if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.harvest(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
+            } else {
+                error = creep.withdraw(target, RESOURCE_ENERGY);
+                if(error == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                } else if (error == ERR_NOT_ENOUGH_RESOURCES) {
+                    creep.memory.destination = undefined;
+                }
             }
         }
     }

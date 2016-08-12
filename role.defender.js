@@ -10,7 +10,7 @@ var roleDefender = {
                     creep.moveTo(badGuy);
                 }
             } else {
-                creep.moveTo(34,20);
+                creep.moveTo(38,31);
             }
         }
     }

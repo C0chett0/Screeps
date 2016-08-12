@@ -7,21 +7,23 @@ var roleDefender = require('role.defender');
 var utilMaps = require('utils.map');
 var towerUtils = require('utils.tower');
 
-var Spawn1 = 'Maizon';
+var Spawn1 = 'Maio';
+
 
 module.exports.loop = function () {
 
-    var room = Game.rooms['W48S4'];
+    var room = Game.rooms['W41S57'];
+
     if(utilMaps.initialized != true) {
         utilMaps.init(room);
     }
     var maxCreeps = {
-        harvesters: 7,
+        harvesters: 5,
         miners: utilMaps.miningSpots.length,
         upgraders: 5,
-        builders: 7,
+        builders: 5,
         repairers: 2,
-        defenders: 15
+        defenders: 2
     };
 
     var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy > 10});
@@ -31,7 +33,7 @@ module.exports.loop = function () {
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
-            console.log('Clearing non-existing creep memory:', name, '(' + Memory.creeps[name].role.trim() + ')');
+            console.log('Clearing non-existing creep memory:', name, '(' + Memory.creeps[name].role + ')');
             delete Memory.creeps[name];
         }
     }
@@ -53,38 +55,49 @@ module.exports.loop = function () {
     )
 
     var extensions = room.find(FIND_MY_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_EXTENSION /*&& i.energy > 0*/});
-    var availableEnergy = Game.spawns[Spawn1].energy;
-    for (var i = extensions.length - 1; i >= 0; i--) {
-        availableEnergy += extensions[i].energy;
-    }
 
-    if (availableEnergy >= 350) {
 
-        if (harvesters.length < maxCreeps.harvesters) {
-            var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK, MOVE, CARRY, MOVE], undefined, {role: 'harvester'});
+    if (room.energyAvailable >= 300) {
+        if(harvesters.length == 0) {
+            var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK, MOVE], undefined, {role: 'harvester'});
             console.log('Spawning new harvester: ' + newName);
-        }
-        else if (miners.length < maxCreeps.miners) {
+        } else if(upgraders.length ==0) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE, MOVE], undefined, {role: 'upgrader'});
+            console.log('Spawning new upgrader: ' + newName);
+        } else if(miners.length ==0 && room.energyCapacityAvailable > 300) {
             var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, WORK, MOVE], undefined, {role: 'miner'});
             console.log('Spawning new miner: ' + newName);
-        }
-
-        else if (upgraders.length < maxCreeps.upgraders) {
-            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE, MOVE, MOVE], undefined, {role: 'upgrader'});
-            console.log('Spawning new upgrader: ' + newName);
-        }
-
-        else if (builders.length < maxCreeps.builders) {
-            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE, MOVE, MOVE], undefined, {role: 'builder'});
+        } else if(builders.length ==0) {
+            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE, MOVE], undefined, {role: 'builder'});
             console.log('Spawning new builder: ' + newName);
-        }
-        else if (repairers.length < maxCreeps.repairers) {
-            var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, CARRY, MOVE, MOVE, MOVE], undefined, {role: 'repair'});
-            console.log('Spawning new repair: ' + newName);
-        }
-        else if (defenders.length < maxCreeps.defenders) {
-            var newName = Game.spawns[Spawn1].createCreep([MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK], undefined, {role: 'defender'});
-            console.log('Spawning new defender: ' + newName);
+        } else {
+
+            if (harvesters.length < maxCreeps.harvesters) {
+                var newName = Game.spawns[Spawn1].createCreep([CARRY, MOVE, WORK, CARRY, MOVE, MOVE], undefined, {role: 'harvester'});
+                console.log('Spawning new harvester: ' + newName);
+            }
+            else if (miners.length < maxCreeps.miners && room.energyCapacityAvailable > 300) {
+                var newName = Game.spawns[Spawn1].createCreep([WORK, WORK, WORK, MOVE], undefined, {role: 'miner'});
+                console.log('Spawning new miner: ' + newName);
+            }
+
+            else if (upgraders.length < maxCreeps.upgraders) {
+                var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE, CARRY, MOVE, MOVE], undefined, {role: 'upgrader'});
+                console.log('Spawning new upgrader: ' + newName);
+            }
+
+            else if (builders.length < maxCreeps.builders) {
+                var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE, CARRY, MOVE, MOVE], undefined, {role: 'builder'});
+                console.log('Spawning new builder: ' + newName);
+            }
+            else if (repairers.length < maxCreeps.repairers) {
+                var newName = Game.spawns[Spawn1].createCreep([WORK, CARRY, MOVE, CARRY, MOVE, MOVE], undefined, {role: 'repair'});
+                console.log('Spawning new repair: ' + newName);
+            }
+            else if (defenders.length < maxCreeps.defenders) {
+                var newName = Game.spawns[Spawn1].createCreep([MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK], undefined, {role: 'defender'});
+                console.log('Spawning new defender: ' + newName);
+            }
         }
     }
     for (var name in Game.creeps) {
