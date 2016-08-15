@@ -4,6 +4,7 @@ var roleRepair = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
+        var minLifeRamparts = 35000;
 
         if (creep.memory.repairing && creep.carry.energy == 0) {
             creep.memory.repairing = false;
@@ -28,17 +29,25 @@ var roleRepair = {
                     console.log(creep.name + " healing " + target.name);
                 }
             } else {
-                target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.hits < structure.hitsMax);
-                    }
-                });
-                if (target != undefined) {
-                    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target);
-                    }
+                var damagedStructures = creep.room.find(FIND_STRUCTURES, {filter: (s) => (s.hits < s.hitsMax && s.structureType != STRUCTURE_RAMPART)});
+                var closestDamagedStructure;
+                if(damagedStructures.length > 0) {
+                    closestDamagedStructure = damagedStructures[0];
                 } else {
-                    roleHarvester.run(creep);
+                    var damagedWalls = creep.room.find(FIND_STRUCTURES, {filter: (s) => (s.hits < minLifeRamparts) && s.structureType == STRUCTURE_RAMPART});
+                    if (damagedWalls) {
+                        closestDamagedStructure = damagedWalls[0];
+                        for (let wall of damagedWalls) {
+                            if (wall.hits < closestDamagedStructure.hits) {
+                                closestDamagedStructure = wall;
+                            }
+                        }
+                    }
+                }
+                if (closestDamagedStructure != undefined) {
+                    if(creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closestDamagedStructure);
+                    }
                 }
             }
         } else {
