@@ -18,12 +18,12 @@ module.exports.loop = function () {
         utilMaps.init(room);
     }
     var maxCreeps = {
-        harvesters: 5,
+        harvesters: 7,
         miners: utilMaps.miningSpots.length,
         upgraders: 5,
         builders: 5,
-        repairers: 2,
-        defenders: 2
+        repairers: 1,
+        defenders: 0
     };
 
     var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy > 10});

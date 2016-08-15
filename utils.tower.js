@@ -1,7 +1,8 @@
 var towerUitls = {
     run: function (tower, room) {
         var badGuys = room.find(FIND_HOSTILE_CREEPS);
-        var minLifeRamparts = 35000;
+        var minLifeRamparts = 1000;
+        var maxLifeRamparts = 10000;
         var closestBadGuy;
         if(badGuys.length > 0) {
             closestBadGuy = badGuys[0];
@@ -28,6 +29,16 @@ var towerUitls = {
                         for (let wall of damagedWalls) {
                             if (wall.hits < closestDamagedStructure.hits) {
                                 closestDamagedStructure = wall;
+                            }
+                        }
+                    } else {
+                        var damagedWalls = room.find(FIND_STRUCTURES, {filter: (s) => (s.hits < maxLifeRamparts) && s.structureType == STRUCTURE_RAMPART});
+                        if (damagedWalls && tower.energy / tower.energyCapacity >= .75) {
+                            closestDamagedStructure = damagedWalls[0];
+                            for (let wall of damagedWalls) {
+                                if (wall.hits < closestDamagedStructure.hits) {
+                                    closestDamagedStructure = wall;
+                                }
                             }
                         }
                     }
