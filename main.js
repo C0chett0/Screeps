@@ -7,12 +7,12 @@ var roleDefender = require('role.defender');
 var utilMaps = require('utils.map');
 var towerUtils = require('utils.tower');
 
-var Spawn1 = 'Maio';
+var Spawn1 = 'Spawn1';
 
 
 module.exports.loop = function () {
 
-    var room = Game.rooms['W41S57'];
+    var room = Game.rooms['E55N13'];
 
     if(utilMaps.initialized != true) {
         utilMaps.init(room);
